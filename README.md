@@ -81,17 +81,32 @@ streamlit run app.py
 
 📊 Example Workflow
 
-Load dataset
+1. Load dataset
 
-Preprocess data (handle missing values, encode categories, scale features)
+2. Preprocess data (handle missing values, encode categories, scale features)
+import pandas as pd
 
-Train ML model (Random Forest / Logistic Regression)
+df = pd.read_csv("data/Heart_dataset.csv")
 
-Evaluate results (accuracy, confusion matrix, classification report)
+# Fill missing values
+df.fillna(df.mean(), inplace=True)
 
-Save trained model & scaler for deployment
+# Encode categorical variables
+df_encoded = pd.get_dummies(df, drop_first=True)
 
-Use model for predictions on new patient data
+# Scale features
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(df_encoded.drop("target", axis=1))
+y = df_encoded["target"]
+
+3. Train ML model (Random Forest / Logistic Regression)
+
+4. Evaluate results (accuracy, confusion matrix, classification report)
+
+5. Save trained model & scaler for deployment
+
+6. Use model for predictions on new patient data
 
 🔮 Future Improvements
 
